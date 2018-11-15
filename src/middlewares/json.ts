@@ -1,4 +1,4 @@
-import Boom from 'boom';
+import * as Boom from 'boom';
 import { isEmpty, includes } from 'lodash';
 
 /**
@@ -8,7 +8,7 @@ import { isEmpty, includes } from 'lodash';
  * @param  {Object}   response
  * @param  {Function} next
  */
-export default function json(request, response, next){
+const json = (request, response, next) => {
     const { body, method } = request;
     const disallowedHttpHeaders = [ 'PUT', 'POST', 'PATCH' ];
 
@@ -21,4 +21,6 @@ export default function json(request, response, next){
     }
 
     next();
-}
+};
+
+export default json;

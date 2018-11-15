@@ -25,6 +25,7 @@
     "./src/**/*"
   ],
   "exclude": [
+    "./src/knexfile*",
     "./migrations/**/*",
     "./seeds/**/*",
     "./stubs/**/*",

@@ -1,4 +1,3 @@
-require('@babel/register');
 require('dotenv').config({ path: __dirname + '/../.env' });
 
 const { env } = process;
@@ -29,7 +28,7 @@ if (env.NODE_ENV === 'test') {
 /**
  * Database configuration.
  */
-const dbConfig = {
+module.exports = {
     connection,
     client: env.DB_CLIENT,
     migrations: {
@@ -42,4 +41,3 @@ const dbConfig = {
         stub: './stubs/seed.stub'
     }
 };
-export default dbConfig;

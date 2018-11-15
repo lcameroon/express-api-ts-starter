@@ -1,5 +1,4 @@
 import * as path from 'path';
-import swaggerJSDoc from 'swagger-jsdoc';
 
 const { env } = process;
 /**
@@ -23,16 +22,15 @@ const swaggerOptions = {
     // path to the API docs
     apis: [
         path.join(__dirname, '/../routes.js'),
-        path.join(__dirname, '/../docs/*.js'),
-        path.join(__dirname, '/../docs/*.yml'),
-        path.join(__dirname, '/../api/**/*.yml'),
-        path.join(__dirname, '/../docs/*.yaml')
+        path.join(__dirname, '/../api/*.js'),
+        path.join(__dirname, '/../api/**/*.yml')
     ]
 };
 
 /**
  * Initialize swagger-jsdoc.
  */
-let swaggerSpec = swaggerJSDoc(swaggerOptions);
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 export default swaggerSpec;

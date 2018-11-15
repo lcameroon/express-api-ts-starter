@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import * as Joi from 'joi';
 
 /**
  * Utility helper for Joi validation.
@@ -7,7 +7,7 @@ import Joi from 'joi';
  * @param  {object}  schema
  * @return {Promise}
  */
-function validate(data, schema){
+const validate = (data, schema) => {
     return Joi.validate(data, schema, { abortEarly: false }, err => {
         if (err) {
             return Promise.reject(err);
@@ -15,6 +15,6 @@ function validate(data, schema){
 
         return Promise.resolve(null);
     });
-}
+};
 
 export default validate;

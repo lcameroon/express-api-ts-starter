@@ -6,7 +6,7 @@ import * as HttpStatus from 'http-status-codes';
  * @param  {Error} err
  * @return {Object}
  */
-function buildError(err){
+const buildError = err => {
     // Validation errors
     if (err.isJoi) {
         return {
@@ -36,6 +36,6 @@ function buildError(err){
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
     };
-}
+};
 
 export default buildError;

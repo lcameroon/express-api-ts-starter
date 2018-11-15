@@ -2,13 +2,14 @@ import bookshelf from '../../db';
 
 const TABLE_NAME = 'users';
 
-interface IUser {
+export interface IUser {
+    id?: number | string;
     name: string;
 }
 /**
  * User model.
  */
-class User extends bookshelf.Model<any> {
+class User extends bookshelf.Model<User> {
     get tableName() {
         return TABLE_NAME;
     }

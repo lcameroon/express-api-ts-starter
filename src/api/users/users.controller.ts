@@ -1,69 +1,37 @@
+import { Request, Response, NextFunction, Errback } from 'express';
 import * as HttpStatus from 'http-status-codes';
-import * as userService from './users.service';
 
-/**
- * Get all users.
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- */
-export function fetchAll(req, res, next){
-    userService.getAllUsers().then(data => res.json({ data })).catch(err => next(err));
-}
+import { IUser } from './users.model';
+import { UserService } from './users.service';
 
-/**
- * Get a user by its id.
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- */
-export function fetchById(req, res, next){
-    userService
-        .getUser(req.params.id)
-        .then(data => res.json({ data }))
-        .catch(err => next(err));
-}
+export class UserController {
+    static getAll(req: Request, res: Response, next: NextFunction) {
+        return UserService.fetchAll()
+            .then((data: IUser[]) => res.json({ data }))
+            .catch((err: Errback) => next(err));
+    }
 
-/**
- * Create a new user.
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- */
-export function create(req, res, next){
-    userService
-        .createUser(req.body)
-        .then(data => res.status(HttpStatus.CREATED).json({ data }))
-        .catch(err => next(err));
-}
+    static getById(req: Request, res: Response, next: NextFunction) {
+        return UserService.getById(req.params.id)
+            .then((data: IUser) => res.json({ data }))
+            .catch((err: Errback) => next(err));
+    }
 
-/**
- * Update a user.
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- */
-export function update(req, res, next){
-    userService
-        .updateUser(req.params.id, req.body)
-        .then(data => res.json({ data }))
-        .catch(err => next(err));
-}
+    static create(req: Request, res: Response, next: NextFunction) {
+        return UserService.create(req.body)
+            .then((data: any) => res.status(HttpStatus.CREATED).json({ data }))
+            .catch((err: Errback) => next(err));
+    }
 
-/**
- * Delete a user.
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- */
-export function deleteUser(req, res, next){
-    userService
-        .deleteUser(req.params.id)
-        .then(data => res.status(HttpStatus.NO_CONTENT).json({ data }))
-        .catch(err => next(err));
+    static update(req: Request, res: Response, next: NextFunction) {
+        return UserService.update(req.params.id, req.body)
+            .then((data: any) => res.json({ data }))
+            .catch((err: Errback) => next(err));
+    }
+
+    static deleteById(req: Request, res: Response, next: NextFunction) {
+        return UserService.deleteById(req.params.id)
+            .then((data: any) => res.status(HttpStatus.NO_CONTENT).json({ data }))
+            .catch((err: Errback) => next(err));
+    }
 }

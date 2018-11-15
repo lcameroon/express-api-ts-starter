@@ -1,5 +1,4 @@
-import knexConfig from './knexfile';
-
+const knexConfig = require('./knexfile');
 const bookshelfJs = require('bookshelf');
 const knexJs = require('knex');
 

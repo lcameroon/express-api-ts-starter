@@ -1,6 +1,8 @@
-import Joi from 'joi';
+import { Request, Response, NextFunction } from 'express';
+import * as Joi from 'joi';
+
+import { UserService } from './users.service';
 import validate from '../../utils/validate';
-import * as userService from './users.service';
 
 const SCHEMA = {
     name: Joi.string().label('Name').max(90).required()
@@ -9,25 +11,27 @@ const SCHEMA = {
 /**
  * Validate create/update user request.
  *
- * @param  {Object}   req
- * @param  {Object}   res
- * @param  {Function} next
- * @return {Promise}
  */
-function userValidator(req, res, next){
+export const userValidator = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<any> => {
     return validate(req.body, SCHEMA).then(() => next()).catch(err => next(err));
-}
+};
 
 /**
  * Validate users existence.
- *
- * @param  {Object}   req
- * @param  {Object}   res
- * @param  {Function} next
- * @return {Promise}
  */
-function findUser(req, res, next){
-    return userService.getUser(req.params.id).then(() => next()).catch(err => next(err));
-}
-
-export { findUser, userValidator };
+export const findUser = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<any> => {
+    return UserService.getById(req.params.id)
+        .then(() => {
+            next();
+            return null;
+        })
+        .catch(err => next(err));
+};

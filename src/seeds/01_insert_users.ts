@@ -4,7 +4,7 @@
  * @param  {Object} knex
  * @return {Promise}
  */
-export function seed(knex){
+export const seed = knex => {
     return knex('users').del().then(() => {
         return knex('users').insert([
             {
@@ -17,4 +17,4 @@ export function seed(knex){
             }
         ]);
     });
-}
+};
