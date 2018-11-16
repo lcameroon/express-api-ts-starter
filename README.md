@@ -1,5 +1,5 @@
 <h1>
-  Starter application for building APIs with Express.js in TypeScript
+  Starter App for building APIs with Express.js (TypeScript)
 </h1>
 
 Comes with:
